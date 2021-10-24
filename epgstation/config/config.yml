@@ -268,3 +268,9 @@ stream:
                       -hls_segment_filename %streamFileDir%/stream%streamNum%-%09d.ts -hls_flags delete_segments -c:a
                       aac -ar 48000 -b:a 128k -ac 2 -c:v libx264 -vf scale=-2:480 -b:v 3000k -preset veryfast -flags
                       +loop-global_header %OUTPUT%'
+
+kodiHosts:
+    - name: kodi
+      host: http://kodi.local:8080
+      user: kodi
+      pass: kodi
