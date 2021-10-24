@@ -33,7 +33,7 @@ const getDuration = filePath => {
 };
 
 // 字幕用
-Array.prototype.push.apply(args, ['-fix_sub_duration']);
+// Array.prototype.push.apply(args, ['-fix_sub_duration']);
 // input 設定
 Array.prototype.push.apply(args, ['-i', input]);
 // ビデオストリーム設定
@@ -55,7 +55,7 @@ if (isDualMono) {
 }
 Array.prototype.push.apply(args, ['-c:a', 'aac']);
 // 字幕ストリーム設定
-Array.prototype.push.apply(args, ['-map', '0:s?', '-c:s', 'mov_text']);
+// Array.prototype.push.apply(args, ['-map', '0:s?', '-c:s', 'mov_text']);
 // 品質設定
 Array.prototype.push.apply(args, ['-preset', 'veryfast', '-crf', '18']);
 // 出力ファイル
