@@ -1,0 +1,16 @@
+version: '3.7'
+services:
+    epgstation:
+        image: toruta39/epgstation:latest-debian
+        volumes:
+            - ./epgstation/config:/app/config
+            - ./epgstation/data:/app/data
+            - ./epgstation/thumbnail:/app/thumbnail
+            - ./epgstation/logs:/app/logs
+            - ./recorded:/app/recorded
+        environment:
+            TZ: "Asia/Tokyo"
+        ports:
+            - "30008:8888"
+            - "30009:30009" # forward the socketioPort
+        restart: always
