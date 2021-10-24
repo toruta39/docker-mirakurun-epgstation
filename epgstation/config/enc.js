@@ -57,7 +57,7 @@ Array.prototype.push.apply(args, ['-c:a', 'aac']);
 // 字幕ストリーム設定
 Array.prototype.push.apply(args, ['-map', '0:s?', '-c:s', 'mov_text']);
 // 品質設定
-Array.prototype.push.apply(args, ['-preset', 'veryfast', '-crf', '26']);
+Array.prototype.push.apply(args, ['-preset', 'veryfast', '-crf', '18']);
 // 出力ファイル
 Array.prototype.push.apply(args, [output]);
 
