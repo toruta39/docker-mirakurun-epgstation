@@ -38,12 +38,16 @@ ffprobe: /usr/local/bin/ffprobe
 encodeProcessNum: 4
 concurrentEncodeNum: 1
 encode:
-    - name: H.264
-      cmd: '%NODE% %ROOT%/config/enc.js'
+    - name: H.264高画質
+      cmd: '%NODE% %ROOT%/config/enc_h264_h.js'
       suffix: .mp4
       rate: 4.0
     - name: H.264標準画質
       cmd: '%NODE% %ROOT%/config/enc_h264_m.js'
+      suffix: .mp4
+      rate: 4.0
+    - name: H.265高画質
+      cmd: '%NODE% %ROOT%/config/enc_h265_h.js'
       suffix: .mp4
       rate: 4.0
     - name: H.265標準画質
