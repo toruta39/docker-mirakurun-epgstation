@@ -22,7 +22,7 @@ epgUpdateIntervalTime: 10
 conflictPriority: 1
 recPriority: 2
 
-recordedFormat: '%YEAR%%MONTH%%DAY%_%TITLE%_%CHNAME%'
+recordedFormat: '%YEAR%%MONTH%%DAY%_%TITLE%'
 recordedFileExtension: .m2ts
 recorded:
     - name: recorded
