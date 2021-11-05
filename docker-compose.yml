@@ -1,5 +1,48 @@
 version: '3.7'
 services:
+    mirakurun:
+        image: toruta39/mirakurun:latest
+        cap_add:
+            - SYS_ADMIN
+            - SYS_NICE
+        ports:
+            - "40772:40772"
+            - "9229:9229"
+        volumes:
+            - ./mirakurun/conf:/app-config
+            - ./mirakurun/data:/app-data
+        environment:
+            TZ: "Asia/Tokyo"
+        devices:
+            - /dev/bus:/dev/bus
+            - /dev/px4video0:/dev/px4video0
+            - /dev/px4video1:/dev/px4video1
+            - /dev/px4video2:/dev/px4video2
+            - /dev/px4video3:/dev/px4video3
+        restart: always
+        logging:
+            driver: json-file
+            options:
+                max-file: "1"
+                max-size: 10m
+
+    mysql:
+        image: alpine-mariadb:10.4-arm32v7
+        volumes:
+            - mysql-db:/var/lib/mysql
+        environment:
+            MYSQL_USER: epgstation
+            MYSQL_PASSWORD: epgstation
+            MYSQL_ROOT_PASSWORD: epgstation
+            MYSQL_DATABASE: epgstation
+            TZ: "Asia/Tokyo"
+        command: --character-set-server=utf8 --collation-server=utf8_unicode_ci --performance-schema=false --expire_logs_days=1
+        restart: always
+        logging:
+            options:
+                max-file: "1"
+                max-size: 10m
+
     epgstation:
         image: toruta39/epgstation:latest-debian
         volumes:
@@ -11,6 +54,13 @@ services:
         environment:
             TZ: "Asia/Tokyo"
         ports:
-            - "30008:8888"
-            - "30009:30009" # forward the socketioPort
+            - "8888:8888"
         restart: always
+        depends_on: 
+            - mirakurun
+            - mysql
+        logging:
+            driver: json-file
+            options:
+                max-file: "1"
+                max-size: 10m
