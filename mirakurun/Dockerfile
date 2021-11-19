@@ -29,16 +29,33 @@ RUN apt-get update && \
         dvb-tools \
         && \
     apt-get install -y $DEV && \
+    \
+    git clone https://github.com/stz2012/libarib25.git /tmp/libarib25 && \
+    cd /tmp/libarib25 && \
+    cmake . && \
+    make && \
+    make install && \
+    \
     git clone https://github.com/stz2012/recpt1 /tmp/recpt1 && \
     cd /tmp/recpt1/recpt1 && \
     ./autogen.sh && \
-    ./configure && \
+    ./configure --enable-b25 && \
     make && \
     make install && \
-    rm -rf /tmp/recpt1 && \
+    \
+    git clone https://github.com/dogeel/recdvb.git /tmp/recdvb && \
+    cd /tmp/recdvb && \
+    ./autogen.sh && \
+    ./configure --enable-b25 && \
+    make && \
+    make install && \
+    \
     apt-get -y remove $DEV && \
     apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
+    rm -rf /var/lib/apt/lists/* && \
+    rm -rf /tmp/libarib25 && \
+    rm -rf /tmp/recpt1 && \
+    rm -rf /tmp/recdvb
 COPY --from=build /usr/local/lib/node_modules/mirakurun /app
 CMD ["./docker/container-init.sh"]
 EXPOSE 40772 9229

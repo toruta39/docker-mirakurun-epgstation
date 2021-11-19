@@ -15,6 +15,7 @@ services:
             TZ: "Asia/Tokyo"
         devices:
             - /dev/bus:/dev/bus
+            # - /dev/dvb:/dev/dvb
             - /dev/px4video0:/dev/px4video0
             - /dev/px4video1:/dev/px4video1
             - /dev/px4video2:/dev/px4video2
@@ -26,45 +27,45 @@ services:
                 max-file: "1"
                 max-size: 10m
 
-    mysql:
-        image: yobasystems/alpine-mariadb:10.4.17-arm32v7
-        volumes:
-            - mysql-db:/var/lib/mysql
-        environment:
-            MYSQL_USER: epgstation
-            MYSQL_PASSWORD: epgstation
-            MYSQL_ROOT_PASSWORD: epgstation
-            MYSQL_DATABASE: epgstation
-            TZ: "Asia/Tokyo"
-        command: --character-set-server=utf8 --collation-server=utf8_unicode_ci --performance-schema=false --expire_logs_days=1
-        restart: always
-        logging:
-            options:
-                max-file: "1"
-                max-size: 10m
+#     mysql:
+#         image: yobasystems/alpine-mariadb:10.4.17-arm32v7
+#         volumes:
+#             - mysql-db:/var/lib/mysql
+#         environment:
+#             MYSQL_USER: epgstation
+#             MYSQL_PASSWORD: epgstation
+#             MYSQL_ROOT_PASSWORD: epgstation
+#             MYSQL_DATABASE: epgstation
+#             TZ: "Asia/Tokyo"
+#         command: --character-set-server=utf8 --collation-server=utf8_unicode_ci --performance-schema=false --expire_logs_days=1
+#         restart: always
+#         logging:
+#             options:
+#                 max-file: "1"
+#                 max-size: 10m
 
-    epgstation:
-        image: toruta39/epgstation:latest-debian-arm32v7
-        volumes:
-            - ./epgstation/config:/app/config
-            - ./epgstation/data:/app/data
-            - ./epgstation/thumbnail:/app/thumbnail
-            - ./epgstation/logs:/app/logs
-            - ./recorded:/app/recorded
-        environment:
-            TZ: "Asia/Tokyo"
-        ports:
-            - "8888:8888"
-        restart: always
-        depends_on: 
-            - mirakurun
-            - mysql
-        logging:
-            driver: json-file
-            options:
-                max-file: "1"
-                max-size: 10m
+#     epgstation:
+#         image: toruta39/epgstation:latest-debian-arm32v7
+#         volumes:
+#             - ./epgstation/config:/app/config
+#             - ./epgstation/data:/app/data
+#             - ./epgstation/thumbnail:/app/thumbnail
+#             - ./epgstation/logs:/app/logs
+#             - ./recorded:/app/recorded
+#         environment:
+#             TZ: "Asia/Tokyo"
+#         ports:
+#             - "8888:8888"
+#         restart: always
+#         depends_on: 
+#             - mirakurun
+#             - mysql
+#         logging:
+#             driver: json-file
+#             options:
+#                 max-file: "1"
+#                 max-size: 10m
 
-volumes:
-    mysql-db:
-        driver: local
+# volumes:
+#     mysql-db:
+#         driver: local
