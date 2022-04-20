@@ -1,7 +1,7 @@
 port: 8888
 socketioPort: 8889
 clientSocketioPort: 30009
-mirakurunPath: http://192.168.3.212:40772/
+mirakurunPath: http://192.168.3.203:40772/
 
 # dbtype: sqlite
 # sqlite:
