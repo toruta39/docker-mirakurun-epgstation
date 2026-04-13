@@ -1,16 +1,17 @@
-ARG ARCH=
-FROM ${ARCH}node:20-bookworm AS build
+ARG MIRAKURUN_VERSION=4.0.0-beta.18
+FROM node:20-bookworm AS build
 WORKDIR /app
 ENV DOCKER=YES
-ADD mirakurun/ .
 RUN apt-get update && \
     apt-get upgrade -y && \
-    apt-get install -y --no-install-recommends build-essential && \
+    apt-get install -y --no-install-recommends git ca-certificates build-essential && \
+    git clone --depth 1 --branch ${MIRAKURUN_VERSION} \
+        https://github.com/Chinachu/Mirakurun.git . && \
     npm install && \
     npm run build && \
     npm install -g --unsafe-perm --production
 
-FROM ${ARCH}node:20-bookworm-slim
+FROM node:20-bookworm-slim
 
 WORKDIR /app
 ENV DEV="build-essential libtool autoconf git automake cmake"

@@ -1,11 +1,7 @@
 version: '3.7'
 services:
     mirakurun:
-        # image: toruta39/mirakurun:latest-arm32v7
-        build:
-            context: ./mirakurun
-            args:
-              ARCH: arm32v7/
+        image: ghcr.io/toruta39/mirakurun:latest-arm32v7
         cap_add:
             - SYS_ADMIN
             - SYS_NICE
