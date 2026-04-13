@@ -5,7 +5,7 @@ REGISTRY="ghcr.io/toruta39"
 IMAGE="mirakurun"
 MIRAKURUN_VERSION="$(cat "$(dirname "$0")/MIRAKURUN_VERSION" | tr -d '[:space:]')"
 PLATFORM="linux/arm/v7"
-BUILDER="orbstack"
+BUILDER="zealous_cohen" # change to builder name
 
 docker buildx build \
   --builder "${BUILDER}" \
