@@ -1,5 +1,5 @@
 ARG ARCH=
-FROM ${ARCH}node:16.6.1-buster AS build
+FROM ${ARCH}node:20-bookworm AS build
 WORKDIR /app
 ENV DOCKER=YES
 ADD mirakurun/ .
@@ -10,7 +10,7 @@ RUN apt-get update && \
     npm run build && \
     npm install -g --unsafe-perm --production
 
-FROM ${ARCH}node:16.6.1-buster-slim
+FROM ${ARCH}node:20-bookworm-slim
 
 WORKDIR /app
 ENV DEV="build-essential libtool autoconf git automake cmake"
@@ -26,7 +26,7 @@ RUN apt-get update && \
         libccid \
         libdvbv5-dev \
         pcsc-tools \
-        dvb-tools \
+        v4l-utils \
         && \
     apt-get install -y $DEV && \
     \
