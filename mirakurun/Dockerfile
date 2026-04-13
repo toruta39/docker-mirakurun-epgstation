@@ -1,5 +1,5 @@
-ARG MIRAKURUN_VERSION=4.0.0-beta.18
 FROM node:20-bookworm AS build
+ARG MIRAKURUN_VERSION=4.0.0-beta.18
 WORKDIR /app
 ENV DOCKER=YES
 RUN apt-get update && \
